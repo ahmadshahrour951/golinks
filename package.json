@@ -1,0 +1,9 @@
+{
+  "name": "golinks",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/ahmadshahrour951/golinks.git",
+  "author": "shahrour <ahmadshahrour951@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
