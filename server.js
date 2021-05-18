@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const cors  = require('cors')
 
-const routes = require('./routes')
+const routes = require('./app/routes')
 
 const app = express();
 const PORT = process.env.PORT || 8000;
