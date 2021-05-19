@@ -3,7 +3,7 @@ const router = express.Router();
 
 const controllers = require('./controllers')
 
-router.get('/')
+router.get('/:username', controllers.getUserStats)
 
 // Fall back for error handling
 router.use((error, req, res, next) => {
