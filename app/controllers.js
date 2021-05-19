@@ -72,7 +72,10 @@ async function getUserStats(req, res, next) {
 
     return res.status(200).json({ message: 'Success', data: outputObj });
   } catch (error) {
-    console.log(error);
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
   }
 }
 
