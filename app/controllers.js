@@ -5,13 +5,13 @@ async function getUserStats(req, res, next) {
     repos_count: 0,
     stargazers_count: 0,
     forks_count: 0,
-    repos_avg_size: 0,
+    repos_avg_size_kb: 0,
     repos_langs: [],
   };
 
   try {
     const resGeneral = await axios.get(
-      `${process.env.GITHUB_API_URL}/users/${req.query.username}`
+      `${process.env.GITHUB_API_URL}/users/${req.params.username}`
     );
 
     let reposLeft = resGeneral.data.public_repos;
@@ -26,7 +26,7 @@ async function getUserStats(req, res, next) {
     while (reposLeft > 0) {
       promiseList.push(
         axios.get(
-          `${process.env.GITHUB_API_URL}/users/${req.query.username}/repos`,
+          `${process.env.GITHUB_API_URL}/users/${req.params.username}/repos`,
           {
             params: {
               page,
@@ -57,7 +57,7 @@ async function getUserStats(req, res, next) {
       }
     }
 
-    outputObj.repos_avg_size = Number(
+    outputObj.repos_avg_size_kb = Number(
       (totalSize / outputObj.repos_count).toFixed(2)
     );
 
