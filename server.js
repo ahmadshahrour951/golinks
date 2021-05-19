@@ -14,7 +14,7 @@ app.use(logger('combined'));
 app.use(express.json());
 app.use(cors('*'));
 
-app.use('/api/v1', routes);
+app.use('/stats', routes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

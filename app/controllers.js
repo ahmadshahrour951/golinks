@@ -11,37 +11,42 @@ async function getUserStats(req, res, next) {
 
   try {
     const resGeneral = await axios.get(
-      `${process.env.GITHUB_API_URL}/users/${req.params.username}`
+      `${process.env.GITHUB_API_URL}/users/${req.query.username}`
     );
-
-    outputObj.repos_count = resGeneral.data.public_repos;
 
     let reposLeft = resGeneral.data.public_repos;
     let page = 1;
-    let perPage = reposLeft < 100 ? reposLeft : 100;
+    const per_page = Number(req.query.per_page) || 100;
+    const forked = req.query.forked !== 'false';
+
     let promiseList = [];
     let langFreq = {};
     let totalSize = 0;
 
     while (reposLeft > 0) {
       promiseList.push(
-          axios.get(resGeneral.data.repos_url, {
+        axios.get(
+          `${process.env.GITHUB_API_URL}/users/${req.query.username}/repos`,
+          {
             params: {
               page,
-              per_page: perPage,
+              per_page,
             },
-          })
+          }
+        )
       );
 
-      reposLeft -= perPage;
+      reposLeft -= per_page;
       page++;
-      perPage = reposLeft < 100 ? reposLeft : 100;
     }
 
     const resList = await axios.all(promiseList);
 
     for (let resRepos of resList) {
       for (let repo of resRepos.data) {
+        if (!forked && repo.fork) continue;
+
+        outputObj.repos_count++;
         outputObj.stargazers_count += repo.stargazers_count;
         outputObj.forks_count += repo.forks_count;
         totalSize += repo.size;
