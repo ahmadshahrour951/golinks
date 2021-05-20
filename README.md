@@ -40,11 +40,11 @@ A json object in the following format as an initial state:
 {
   "message": "User Github Stats Successfully Fetched",
   "data": {
-    repos_count: 0,
-    stargazers_count: 0,
-    forks_count: 0,
-    repos_avg_size_kb: 0,
-    repos_langs: [
+    "repos_count": 0,
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "repos_avg_size_kb": 0,
+    "repos_langs": [
       {"name": "language_1", "count": 2},
       {"name": "language_2", "count": 1},
     ],
