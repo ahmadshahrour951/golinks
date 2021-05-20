@@ -90,6 +90,9 @@ async function getUserStats(req, res, next) {
     // this is where I construct a list of objects where each object represents
     // a language and its frequency.
     for (let lang in langFreq) {
+      // I remove the null attribute, because this isn't very useful and it is not a language
+      if (lang === 'null') continue;
+
       outputObj.repos_langs.push({
         name: lang,
         count: langFreq[lang],
@@ -99,8 +102,11 @@ async function getUserStats(req, res, next) {
     // I then sort the list of objects based on their frequency in a desecending manner
     outputObj.repos_langs.sort((a, b) => b.count - a.count);
 
-    return res.status(200).json({ message: 'Success', data: outputObj });
     // I finally return a success status with a message and the manipulated outputObj
+    return res.status(200).json({
+      message: 'User Github Stats Successfully Fetched',
+      data: outputObj,
+    });
   } catch (error) {
     // This is where I help the developer using my api to understand an error
     if (!error.statusCode) {
