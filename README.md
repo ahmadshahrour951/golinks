@@ -35,7 +35,7 @@ Parameters:
   - `forked`is non-required query parameter, if set to `false`, the endpoint will only provide filtered data aggregations for non-forked repositories. The data will be unfiltered by default.
 
 Return:
-A json object in the following format as an initial state:
+A 200 response status, with a JSON object in the following format as an initial state:
 ```json
 {
   "message": "User Github Stats Successfully Fetched",
