@@ -1,7 +1,7 @@
 # GoLinks Assignment - Github User Stats
 This assignment is based on building a small server application to retrieve aggregated data about a GitHub user. These stats require requests to be made to GitHub's API, and from there a JSON object should be returned with the aggregation.
 
-Heroku Live Deployment: https://golinks-github-stats.herokuapp.com
+Heroku Live Deployment: https://golinks-github-stats.herokuapp.com <br />
 Skip to Getting Started section to run this code on your local machine.
 ## Tech Stack
 - Language: **Javascript**
@@ -19,12 +19,16 @@ A RESTful API GET endpoint was created that queries GitHub's API. Within the end
 Ensure you have NodeJS and Yarn installed globally on your local machine.
 
 Once completed run the following in the directory terminal to install package requirements:
-```yarn install```
+```
+yarn install
+```
 
 Then, run the following command to start the development server:
-```yarn run dev```
+```
+yarn run dev
+```
 
-From there you'll be able to request data from only one endpoint.
+### API Endpoint
 GET `/{username}?forked={Boolean}`:
 Parameters:
   -  `username` is a required string parameter to query github's api for a particular user
