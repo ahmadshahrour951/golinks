@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+const GITHUB_API_URL = 'https://api.github.com';
+
 async function getUserStats(req, res, next) {
   let outputObj = {
     repos_count: 0,
@@ -11,7 +13,7 @@ async function getUserStats(req, res, next) {
 
   try {
     const resGeneral = await axios.get(
-      `${process.env.GITHUB_API_URL}/users/${req.params.username}`
+      `${GITHUB_API_URL}/users/${req.params.username}`
     );
 
     let reposLeft = resGeneral.data.public_repos;
@@ -25,15 +27,12 @@ async function getUserStats(req, res, next) {
 
     while (reposLeft > 0) {
       promiseList.push(
-        axios.get(
-          `${process.env.GITHUB_API_URL}/users/${req.params.username}/repos`,
-          {
-            params: {
-              page,
-              per_page,
-            },
-          }
-        )
+        axios.get(`${GITHUB_API_URL}/users/${req.params.username}/repos`, {
+          params: {
+            page,
+            per_page,
+          },
+        })
       );
 
       reposLeft -= per_page;

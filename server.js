@@ -1,6 +1,3 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv-safe').config();
-}
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
